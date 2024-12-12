@@ -1,8 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"math/rand"
+	"os"
+	"time"
+)
 
 func main() {
-	fmt.Println("Welcome to the playground!")
+
+	randSource := rand.NewSource(time.Now().UnixNano())
+	randGenerator := rand.New(randSource)
+
+	reader := bufio.NewReader(os.Stdin)
 
 }
