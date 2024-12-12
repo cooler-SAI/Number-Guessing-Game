@@ -75,7 +75,8 @@ func main() {
 
 			if guess == number {
 				// Correct guess
-				fmt.Printf("Congratulations! You guessed the correct number %d in %d attempts.\n", number, attempts)
+				fmt.Printf("Congratulations! You guessed the correct number %d in %d attempts.\n",
+					number, attempts)
 				break
 			} else if guess < number {
 				// Guess is too low
