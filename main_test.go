@@ -28,3 +28,25 @@ func TestDetermineChances(t *testing.T) {
 		})
 	}
 }
+
+func TestCheckGuess(t *testing.T) {
+	tests := []struct {
+		name     string
+		guess    int
+		number   int
+		expected string
+	}{
+		{"Correct guess", 50, 50, "correct"},
+		{"Guess is less", 30, 50, "greater"},
+		{"Guess is greater", 70, 50, "less"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := checkGuess(tt.guess, tt.number)
+			if result != tt.expected {
+				t.Errorf("checkGuess() = %v, want %v", result, tt.expected)
+			}
+		})
+	}
+}
