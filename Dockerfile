@@ -1,4 +1,5 @@
-FROM golang:latest
+FROM golang:1.23 AS builder
+
 WORKDIR /app
 
 COPY go.mod go.sum ./
@@ -10,8 +11,6 @@ COPY . .
 RUN go build -o main .
 
 FROM ubuntu:latest
-
-LABEL authors="cooler-SAI"
 
 WORKDIR /root/
 
