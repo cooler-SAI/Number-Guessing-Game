@@ -61,7 +61,8 @@ func main() {
 			}
 
 			if guess == number {
-				fmt.Printf("Congratulations! You guessed the correct number %d in %d attempts.\n", number, attempts)
+				fmt.Printf("Congratulations! You guessed the correct number %d in %d attempts.\n",
+					number, attempts)
 				break
 			} else if guess < number {
 				fmt.Println("Incorrect! The number is greater.")
