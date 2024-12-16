@@ -10,6 +10,29 @@ import (
 	"time"
 )
 
+func determineChances(choice string) (int, error) {
+	switch choice {
+	case "1":
+		return 10, nil
+	case "2":
+		return 5, nil
+	case "3":
+		return 3, nil
+	default:
+		return 0, fmt.Errorf("invalid choice")
+	}
+}
+
+func checkGuess(guess, number int) string {
+	if guess == number {
+		return "correct"
+	} else if guess < number {
+		return "greater"
+	} else {
+		return "less"
+	}
+}
+
 func main() {
 	randSource := rand.NewSource(time.Now().UnixNano())
 	randGenerator := rand.New(randSource)
@@ -25,23 +48,11 @@ func main() {
 		fmt.Println("2. Medium (5 chances)")
 		fmt.Println("3. Hard (3 chances)")
 		fmt.Print("Enter your choice: ")
-		choice, err := reader.ReadString('\n')
-		if err != nil {
-			fmt.Println("Error reading input:", err)
-			continue
-		}
-
+		choice, _ := reader.ReadString('\n')
 		choice = strings.TrimSpace(choice)
 
-		var chances int
-		switch choice {
-		case "1":
-			chances = 10
-		case "2":
-			chances = 5
-		case "3":
-			chances = 3
-		default:
+		chances, err := determineChances(choice)
+		if err != nil {
 			fmt.Println("Invalid choice. Please try again.")
 			continue
 		}
@@ -54,17 +65,19 @@ func main() {
 			fmt.Printf("Enter your guess (%d remaining): ", chances-attempts+1)
 			guessStr, _ := reader.ReadString('\n')
 			guessStr = strings.TrimSpace(guessStr)
+
 			guess, err := strconv.Atoi(guessStr)
 			if err != nil || guess < 1 || guess > 100 {
 				fmt.Println("Please enter a valid number between 1 and 100.")
 				continue
 			}
 
-			if guess == number {
+			result := checkGuess(guess, number)
+			if result == "correct" {
 				fmt.Printf("Congratulations! You guessed the correct number %d in %d attempts.\n",
 					number, attempts)
 				break
-			} else if guess < number {
+			} else if result == "greater" {
 				fmt.Println("Incorrect! The number is greater.")
 			} else {
 				fmt.Println("Incorrect! The number is less.")
