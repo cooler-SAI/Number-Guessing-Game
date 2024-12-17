@@ -23,8 +23,6 @@ func determineChances(choice string) (int, error) {
 	}
 }
 
-// commit test
-
 func checkGuess(guess, number int) string {
 	if guess == number {
 		return "correct"
