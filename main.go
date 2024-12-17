@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Number-Guessing-Game/engine"
 	"bufio"
 	"fmt"
 	"math/rand"
@@ -38,9 +39,7 @@ func main() {
 	randGenerator := rand.New(randSource)
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Println("Welcome to the Number Guessing Game!")
-	fmt.Println("I'm thinking of a number between 1 and 100.")
-	fmt.Println("You need to guess the number correctly within the allowed chances.")
+	engine.PrintWelcomeMessage()
 
 	for {
 		fmt.Println("\nPlease select the difficulty level:")
