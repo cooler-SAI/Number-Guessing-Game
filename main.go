@@ -40,6 +40,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	engine.PrintWelcomeMessage()
+	engine.TestHuman()
 
 	for {
 		fmt.Println("\nPlease select the difficulty level:")

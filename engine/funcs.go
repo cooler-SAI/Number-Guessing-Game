@@ -1,6 +1,11 @@
 package engine
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+)
 
 func PrintWelcomeMessage() {
 	fmt.Println("=======================================")
@@ -10,4 +15,19 @@ func PrintWelcomeMessage() {
 	fmt.Println("||   Choose a difficulty level and   ||")
 	fmt.Println("||   try your best to win the game!  ||")
 	fmt.Println("=======================================")
+}
+
+func TestHuman() {
+	fmt.Println("Human test")
+}
+
+func HandleExitSignal() {
+
+	exitSignal := make(chan os.Signal, 1)
+	signal.Notify(exitSignal, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-exitSignal
+		fmt.Println("\nExit signal received")
+		os.Exit(0)
+	}()
 }
